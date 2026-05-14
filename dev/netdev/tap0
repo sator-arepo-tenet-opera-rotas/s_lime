@@ -1,0 +1,1 @@
+-netdev tap,id=tap0,ifname=tap0,script=no -device virtio-net-pci,netdev=tap0
