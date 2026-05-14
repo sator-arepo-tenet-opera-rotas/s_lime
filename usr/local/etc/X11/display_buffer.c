@@ -1,3 +1,5 @@
+#import "display_buffer.h"
+
 GsDefDispBuff(0, 0, 0, 240); /* Initializes the double buffers */ 
 /* in memory and specifies clipping */ 
 /* parameters. */ 
