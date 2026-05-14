@@ -1,0 +1,42 @@
+-drive file=netbsd.qcow2,if=none,id=hd0 \
+-device virtio-blk-pci,drive=hd0
+-hda netbsd.qcow2
+-object rng-random,filename=/dev/urandom,id=viornd0 \
+-device virtio-rng-pci,rng=viornd0
+-netdev user,id=vioif0 -device virtio-net-pci,netdev=vioif0
+-netdev user,id=wm0 -device e1000,netdev=wm0
+-netdev user,id=pcn0 -device pcnet,netdev=pcn0
+-audiodev oss,id=oss,out.dev=/dev/audio,in.dev=/dev/audio \
+-device ac97,audiodev=oss
+-display sdl,gl=on -vga vmware \
+-usb -device usb-mouse,bus=usb-bus.0
+-display vnc=unix:/home/nia/.qemu-myvm-vnc -vga vmware
+-usb -device usb-mouse,bus=usb-bus.0
+
+-display curses
+## While QEMU user networking is easy to use and doesn't require root privileges, it's generally slower than bridged networking using a tap(4) device, and doesn't allow the use of diagnostic tools like ping(8) inside the guest.
+## To configure bridged networking on a NetBSD host, you must first make note of your host machine’s primary network interace. Find the one with an address assigned and a route to the outside world with ifconfig(8).
+## In this example, the host machine’s primary interface is wm0. All of these commands run on the host machine.
+
+## Create a virtual tap(4) interface:
+
+# ifconfig tap0 create
+# ifconfig tap0 descr "NetBSD VM" up
+
+## Create a bridge(4) connecting the actual interface and the virtual interface:
+
+# ifconfig bridge0 create
+# ifconfig bridge0 descr "LAN VM bridge" up
+# brconfig bridge0 add tap0 add wm0
+
+## Configure NetBSD to do this all at boot time by editing /etc/ifconfig.tap0:
+
+create
+descr "NetBSD VM" up
+! ifconfig bridge0 create
+! ifconfig bridge0 descr "LAN VM bridge" up
+! brconfig bridge0 add tap0 add wm0
+
+## You can now pass the arguments to QEMU to run with bridged networking:
+
+-netdev tap,id=tap0,ifname=tap0,script=no -device virtio-net-pci,netdev=tap0
