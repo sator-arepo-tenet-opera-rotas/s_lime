@@ -1,0 +1,2 @@
+# dd if=FreeBSD-15.0-RELEASE-amd64-dvd1.iso \
+    of=/dev/da0 bs=1m conv=sync
