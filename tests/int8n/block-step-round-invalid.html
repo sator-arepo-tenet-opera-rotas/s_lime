@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>web-platform-tests dashboard</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R9Z49K7QCN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  
+  
+  
+  
+  const host = window.location.hostname;
+  if (host == "wpt.fyi"){
+    gtag('config', 'G-Q5FRYPBBYC');
+  } else {
+    
+    gtag('config', 'G-R9Z49K7QCN');
+  }
+  window.onerror = function(message, source, lineno, colno) {
+    let description;
+    
+    if (message.toLowerCase().indexOf('script error') > -1) {
+      description = `External error: ${message}`;
+    } else {
+      description = `${message} at ${source}:${lineno}:${colno}`;
+    }
+    
+    gtag('event', 'exception', {'description': description});
+  };
+</script>
+
+<link rel="stylesheet" href="/static/common.css">
+<link rel="icon" href="/static/favicon.ico">
+<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+<script type="module" src="/components/wpt-header.js"></script>
+
+<script type="module" src="/views/wpt-app.js"></script>
+<script type="module" src="/components/test-runs-query.js"></script>
+</head>
+<body>
+  <div id="content">
+    <wpt-app  labels="[&#34;experimental&#34;,&#34;master&#34;]" aligned
+
+></wpt-app>
+  </div>
+</body>
+</html>
