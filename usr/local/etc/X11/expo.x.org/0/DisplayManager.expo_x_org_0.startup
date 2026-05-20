@@ -1,0 +1,72 @@
+
+
+DisplayManager.servers
+    This resource either specifies a file name full of server entries, one per line (if the value starts with a slash), or a single server entry. See the section LOCAL SERVER SPECIFICATION for the details.
+DisplayManager.errorLogFile
+    Error output is normally directed at the system console. To redirect it, set this resource to a file name. A method to send these messages to syslog(3) should be developed for systems which support it; however, the wide variety of interfaces precludes any system-independent implementation. This file also contains any output directed to stderr by the Xsetup, Xstartup, Xsession and Xreset files, so it will contain descriptions of problems in those scripts as well.
+DisplayManager.debugLevel
+    If the integer value of this resource is greater than zero, reams of debugging information will be printed. It also disables daemon mode, which would redirect the information into the bit-bucket, and allows non-root users to run xenodm, which would normally not be useful.
+DisplayManager.daemonMode
+    Normally, xenodm attempts to make itself into a daemon process unassociated with any terminal. This is accomplished by forking and leaving the parent process to exit, then closing file descriptors and releasing the controlling terminal. In some environments this is not desired (in particular, when debugging). Setting this resource to false will disable this feature.
+DisplayManager.authDir
+    This names a directory under which xenodm stores authorization files while initializing the session. The default value is /etc/X11/xenodm. Can be overridden for specific displays by DisplayManager.DISPLAY.authFile.
+DisplayManager.autoRescan
+    This boolean controls whether xenodm rescans the configuration, servers, access control and authentication keys files after a session terminates and the files have changed. By default it is true. You can force xenodm to reread these files by sending a SIGHUP to the main process.
+DisplayManager.exportList
+    A list of additional environment variables, separated by white space, to pass on to the Xsetup, Xstartup, Xsession, and Xreset programs.
+DisplayManager.DISPLAY.autoLogin
+    This resource specifies the name of an user that will be logged in automatically, without displaying the xlogin widget.
+DisplayManager.DISPLAY.resources
+    This resource specifies the name of the file to be loaded by xrdb(1) as the resource database onto the root window of screen 0 of the display. The Xsetup program and the Login widget will use the resources set in this file. This resource database is loaded just before the authentication procedure is started, so it can control the appearance of the login window. See the section AUTHENTICATION WIDGET, which describes the various resources that are appropriate to place in this file. There is no default value for this resource, but /etc/X11/xenodm/Xresources is the conventional name.
+DisplayManager.DISPLAY.xrdb
+    Specifies the program used to load the resources. By default, xenodm uses /usr/X11R6/bin/xrdb.
+DisplayManager.DISPLAY.cpp
+    This specifies the name of the C preprocessor which is used by xrdb(1).
+DisplayManager.DISPLAY.setup
+    This specifies a program which is run (as root) before offering the Login window. This may be used to change the appearance of the screen around the Login window or to put up other windows (e.g., you may want to run xconsole(1) here). By default, no program is run. The conventional name for a file used here is Xsetup. See the section SETUP PROGRAM.
+DisplayManager.DISPLAY.startup
+    This specifies a program which is run (as root) after the authentication process succeeds. By default, no program is run. The conventional name for a file used here is Xstartup. See the section STARTUP PROGRAM.
+DisplayManager.DISPLAY.session
+    This specifies the session to be executed (not running as root). By default, /usr/X11R6/bin/xterm is run. The conventional name is Xsession. See the section SESSION PROGRAM.
+DisplayManager.DISPLAY.reset
+    This specifies a program which is run (as root) after the session terminates. By default, no program is run. The conventional name is Xreset. See the section RESET PROGRAM.
+DisplayManager.DISPLAY.openDelay
+     
+DisplayManager.DISPLAY.openRepeat
+     
+DisplayManager.DISPLAY.openTimeout
+     
+DisplayManager.DISPLAY.startAttempts
+     
+DisplayManager.DISPLAY.reservAttempts
+    These numeric resources control the behavior of xenodm when attempting to open intransigent servers. openDelay is the length of the pause in seconds between successive attempts, openRepeat is the number of attempts to make, openTimeout is the amount of time to wait while actually attempting the open (i.e., the maximum time spent in the connect(2) system call) and startAttempts is the number of times this entire process is done before giving up on the server. After openRepeat attempts have been made, or if openTimeout seconds elapse in any particular attempt, xenodm terminates and restarts the server, attempting to connect again. This process is repeated startAttempts times, at which point the display is declared dead and disabled. Although this behavior may seem arbitrary, it has been empirically developed and works quite well on most systems. The bound reservAttempts is the number of times a successful connect is allowed to be followed by a fatal error. When reached, the display is disabled. The default values are openDelay: 15, openRepeat: 5, openTimeout: 120, startAttempts: 4 and reservAttempts: 2.
+DisplayManager.DISPLAY.terminateServer
+    This boolean resource specifies whether the X server should be terminated when a session terminates (instead of resetting it). This option can be used when the server tends to grow without bound over time, in order to limit the amount of time the server is run. The default value is false.
+DisplayManager.DISPLAY.userPath
+    xenodm sets the PATH environment variable for the session to this value. It should be a colon separated list of directories; see sh(1) for a full description. The default value is “/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin”.
+DisplayManager.DISPLAY.systemPath
+    xenodm sets the PATH environment variable for the startup and reset scripts to the value of this resource. The default for this resource is “/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin”. Note the absence of ‘.’ from this entry. This is a good practice to follow for root; it avoids many common Trojan Horse system penetration schemes.
+DisplayManager.DISPLAY.systemShell
+    xenodm sets the SHELL environment variable for the startup and reset scripts to the value of this resource. It is /bin/sh by default.
+DisplayManager.DISPLAY.failsafeClient
+    If the default session fails to execute, xenodm will fall back to this program. This program is executed with no arguments, but executes using the same environment variables as the session would have had (see the section SESSION PROGRAM). By default, /usr/X11R6/bin/xterm is used.
+DisplayManager.DISPLAY.grabServer
+     
+DisplayManager.DISPLAY.grabTimeout
+    To improve security, xenodm grabs the server and keyboard while reading the login name and password. The grabServer resource specifies if the server should be held for the duration of the name/password reading. When false, the server is ungrabbed after the keyboard grab succeeds, otherwise the server is grabbed until just before the session begins. The default is false. The grabTimeout resource specifies the maximum time xenodm will wait for the grab to succeed. The grab may fail if some other client has the server grabbed, or possibly if the network latencies are very high. This resource has a default value of 3 seconds; you should be cautious when raising it, as a user can be spoofed by a look-alike window on the display. If the grab fails, xenodm kills and restarts the server (if possible) and the session.
+DisplayManager.DISPLAY.authorize
+     
+DisplayManager.DISPLAY.authName
+    authorize is a boolean resource which controls whether xenodm generates and uses authorization for the local server connections. If authorization is used, authName is a list of authorization mechanisms to use, separated by white space. When authorize is set for a display and authorization is not available, the user is informed by having a different message displayed in the login widget. By default, authorize is true, authName is “MIT-MAGIC-COOKIE-1”, or, if XDM-AUTHORIZATION-1 is available, “XDM-AUTHORIZATION-1 MIT-MAGIC-COOKIE-1”.
+DisplayManager.DISPLAY.authFile
+    This file is used to communicate the authorization data from xenodm to the server, using the -auth server command line option. It should be kept in a directory which is not world-writable as it could easily be removed, disabling the authorization mechanism in the server. If not specified, a name is generated from DisplayManager.authDir and the name of the display.
+DisplayManager.DISPLAY.authComplain
+    If set to false, disables the use of the unsecureGreeting in the login window. See the section AUTHENTICATION WIDGET. The default is true.
+DisplayManager.DISPLAY.resetSignal
+    The number of the signal xenodm sends to reset the server. See the section CONTROLLING THE SERVER. The default is 1 (SIGHUP).
+DisplayManager.DISPLAY.termSignal
+    The number of the signal xenodm sends to terminate the server. See the section CONTROLLING THE SERVER. The default is 15 (SIGTERM).
+DisplayManager.DISPLAY.resetForAuth
+    The original implementation of authorization in the sample server reread the authorization file at server reset time, instead of when checking the initial connection. As xenodm generates the authorization information just before connecting to the display, an old server would not get up-to-date authorization information. This resource causes xenodm to send SIGHUP to the server after setting up the file, causing an additional server reset to occur, during which time the new authorization information will be read. The default is false, which will work for all MIT servers.
+DisplayManager.DISPLAY.listenTcp
+    If set to true, enable the listen tcp option for the given X server. When this setting is set to false, xenodm will only generate authorizations for the local (ie Unix socket) transport mechanism. Otherwise full authorization for all possible transport mechanisms will be generated. The default is false. 
