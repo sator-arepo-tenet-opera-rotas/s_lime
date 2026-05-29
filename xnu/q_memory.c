@@ -1,6 +1,6 @@
 block-> free = false;
 
-lone_memory_split(block, size);
+engram_split(block, size);
 
 return block-> pointer;
 
@@ -10,15 +10,15 @@ size_t excess = block-> size - size;
 
 // creates new block only if there's enough space for memory block descriptor + 1 byte 
 
-if (excess >= sizeof(struct lone_memory) +1) {
+if (excess >= sizeof(struct engram) +1) {
   
-    new = (struct lone_memory *) (block->pointer + size);
+    new = (struct engram *) (block->pointer + size);
 
     /* weave the new block into the linked lists */
 
     new-> free = true;
   
-    new-> size = excess - sizeof(struct lone_memory);
+    new-> size = excess - sizeof(struct engram);
     
     block-> size = size;
 }
@@ -27,6 +27,6 @@ if (excess >= sizeof(struct lone_memory) +1) {
 
 // in order to deallocate memory just mark the block as free. The block descriptor exists as the next block immediately behind the pointer, id est trivially reachable in O(1)
 
-struct lone_memory *block = ((struct lone_memory *) pointer) - 1;
+struct engram *block = ((struct engram *) pointer) - 1;
 
 block-> free = true;
