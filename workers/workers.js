@@ -29,3 +29,47 @@ function memoized(key) {
 }
 
 ///
+
+// cancel contention to create a controller node out of a swarm of pods (ie a Helmed Cluster)
+// 
+const ctl = { stop: false };
+const search = new Thread(() => {
+  for (const candidate of space) {
+    if (ctl.stop) return null;               // reads the live object — sees the write
+    if (good(candidate)) { ctl.stop = true; return candidate; }  // ...and stops the others because Cancellation is a boolean
+  }
+}, /* one per core */);
+
+// from the main thread, any time:
+ctl.stop = true;
+
+
+Live progress without an event protocol
+
+const progress = { done: 0, total: files.length };
+const t = new Thread(() => {
+  for (const f of files) { process(f); Atomics.add(progress, "done", 1); }
+});
+
+const ticker = setInterval(() => {
+  render(`${progress.done}/${progress.total}`);   // just... read it
+  if (progress.done === progress.total) clearInterval(ticker);
+}, 100);
+await t.asyncJoin();
+
+
+// BLOCKING differes from Blocking HANDOFF ie, one is a function that cannot pass a gated junction, the other a junction that spans two nodes
+
+const lock = new Lock(), cond = new Condition();
+const mailbox = { ready: false, payload: null };
+
+const consumer = new Thread(() => {
+  let received;
+  lock.hold(() => {
+    while (!mailbox.ready) cond.wait(lock);  // releases lock, parks the thread, reacquires
+    received = mailbox.payload;
+  });
+  return received.process();                 // a real object with real methods
+});
+
+lock.hold(() => { mailbox.payload = buildThing(); mailbox.ready = true; cond.notify(); });
