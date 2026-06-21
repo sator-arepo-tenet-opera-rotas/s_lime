@@ -73,3 +73,17 @@ const consumer = new Thread(() => {
 });
 
 lock.hold(() => { mailbox.payload = buildThing(); mailbox.ready = true; cond.notify(); });
+
+
+
+// SSBB: Sync/ Final Phasic:
+const lock = new Lock();           // non-recursive
+lock.hold(() => { /* critical */ }); // tryLock fast path; release is finally-equivalent
+await lock.asyncHold(fn);          // or no fn: resolves to a release() function
+
+const cond = new Condition();
+cond.wait(lock);                   // atomic release+block, spurious wakeups allowed
+cond.asyncWait(lock);              // promise resolves holding the lock again
+cond.notify(); cond.notifyAll();
+
+const tls = new ThreadLocal();     // .value is per-thread, any JS value
