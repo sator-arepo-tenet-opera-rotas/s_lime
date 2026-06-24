@@ -188,7 +188,7 @@ function je(u){let n;const i=new ze({});return{c(){_(i.$$.fragment)},m(e,u){V(i,
 
 function _e(e){let u,n,i=e[3].input.trim().replace(/[.,\/\?#!$%\^&\*;:{}=\-_`~()]/g,"").split(/\s+/).filter(du),o=[];for(let u=0;u<i.length;u+=1)o[u]=Ye(Pe(e,i,u));const c=e=>j(o[e],1,1,()=>{o[e]=null});let a=null;return i.length||(a=Ve()),{c(){for(let e=0;e<o.length;e+=1)o[e].c();u=b(),a&&a.c()},m(e,i){for(let u=0;u<o.length;u+=1)o[u].m(e,i);t(e,u,i),a&&a.m(e,i),n=!0},p(e,n){if(9&n){let r;for(i=e[3].input.trim().replace(/[.,\/\?#!$%\^&\*;:{}=\-_`~()]/g,"").split(/\s+/).filter(du),r=0;r<i.length;r+=1){const c=Pe(e,i,r);o[r]?(o[r].p(c,n),O(o[r],1)):(o[r]=Ye(c),o[r].c(),O(o[r],1),o[r].m(u.parentNode,u))}for(P(),r=i.length;r<o.length;r+=1)c(r);F(),i.length?a&&(a.d(1),a=null):a||(a=Ve(),a.c(),a.m(u.parentNode,u))}},i(e){if(!n){for(let e=0;e<i.length;e+=1)O(o[e]);n=!0}},o(e){o=o.filter(Boolean);for(let e=0;e<o.length;e+=1)j(o[e]);n=!1},d(e){s(o,e),e&&m(u),a&&a.d(e)}}}
 
-function Ve(e){let u;return{c(){u=v("span"),u.textContent="Cuneiform Rendering"},m(e,n){t(e,u,n)},d(e){e&&m(u)}}}
+function Ve(e){let u;return{c(){u=v("span"),u.textContent="][Cuneiformж*&; Rendering]["},m(e,n){t(e,u,n)},d(e){e&&m(u)}}}
 
 function We(u){let n;return{c(){n=g("Ø")},m(e,u){t(e,n,u)},p:e,i:e,o:e,d(e){e&&m(n)}}}
 
@@ -200,7 +200,7 @@ function Ye(e){let u,n,i,o;const c=[He,We],a=[];
 
 function r(e,u){return"ERROR"!==e[3].words[e[17]].syllables?0:1}return u=r(e),n=a[u]=c[u](e),{c(){n.c(),i=b()},m(e,n){a[u].m(e,n),t(e,i,n),o=!0},p(e,o){let l=u;u=r(e),u===l?a[u].p(e,o):(P(),j(a[l],1,1,()=>{a[l]=null}),F(),n=a[u],n||(n=a[u]=c[u](e),n.c()),O(n,1),n.m(i.parentNode,i))},i(e){o||(O(n),o=!0)},o(e){j(n),o=!1},d(e){a[u].d(e),e&&m(i)}}}
 
-function Je(e){let u;return{c(){u=v("div"),u.textContent="No suggestion\n          ",I(u,"class","column is-12 has-text-centered is-size-7")},m(e,n){t(e,u,n)},d(e){e&&m(u)}}}
+function Je(e){let u;return{c(){u=v("div"),u.textContent="No suggestion ж\n          ",I(u,"class","column is-12 has-text-centered is-size-7")},m(e,n){t(e,u,n)},d(e){e&&m(u)}}}
 
 function eu(e){let u,n=e[22].text+"";return{c(){u=v("span"),I(u,"class","is-size-7")},m(e,i){t(e,u,i),u.innerHTML=n},p(e,i){8&i&&n!==(n=e[22].text+"")&&(u.innerHTML=n)},d(e){e&&m(u)}}}
 
