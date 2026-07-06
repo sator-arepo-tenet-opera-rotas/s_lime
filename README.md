@@ -593,7 +593,7 @@ rrr          wwwww  .....                      ====...
 
 
 micro_mkLinux is not a traditional distribution but a toolkit to 
-create your own customized system. It offers not only flexibility, 
+create your own customised system. It offers not only flexibility, 
 small footprint but a very recent kernel and set of applications making 
 it ideal for custom system, appliances as well as to learn Linux 
 specially on the micro-kernel or BIOS level
@@ -602,12 +602,17 @@ specially on the micro-kernel or BIOS level
 
 
 
+<img width="2443" height="3003" alt="Quantum_Logic_Gates" src="https://github.com/user-attachments/assets/ad33171b-18a4-4930-aaee-6607722abfe6" />
 
 
 The Secret of NGG WR the Goose who Mocked the Pharaoh
 -------------------------------------
 
 Hardware and AI/ML Support for Virtual Machines?
+
+
+
+
 
 
 They're the same thing, silly goofus!!!
