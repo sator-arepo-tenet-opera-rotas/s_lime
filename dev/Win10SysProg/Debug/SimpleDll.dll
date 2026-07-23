@@ -1,0 +1,18 @@
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+           1 number of functions
+           1 number of names
+    ordinal hint RVA      name
+          1    0 000111F9 ?IsPrime@@YA_NH@Z = @ILT+500(?IsPrime@@YA_NH@Z)
+$XNU
+        1000 .00cfg
+        1000 .data
+        1000 .idata
+        1000 .msvcjmc
+        2000 .rdata
+        1000 .reloc
+        1000 .rsrc
+        7000 .text
+10000 .textbss
