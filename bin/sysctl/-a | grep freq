@@ -1,0 +1,5 @@
+machdep.cpu.frequency.target = 1400
+machdep.cpu.frequency.current = 1400
+machdep.cpu.frequency.min = 600
+machdep.cpu.frequency.max = 1400
+machdep.cpu.frequency.available = 600 1400

@@ -1,0 +1,1 @@
+//shmem  memory until the system is shut down (or the file removed). It is not, however, a full file system, and certain operations (e.g., mkdir) on it will fail. Do not treat it as a file system.

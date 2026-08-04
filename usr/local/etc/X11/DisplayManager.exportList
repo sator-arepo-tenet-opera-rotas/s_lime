@@ -1,0 +1,11 @@
+
+
+DISPLAY
+    the associated display name
+PATH
+    the value of DisplayManager.DISPLAY.systemPath
+SHELL
+    the value of DisplayManager.DISPLAY.systemShell
+XAUTHORITY
+    may be set to an authority file
+

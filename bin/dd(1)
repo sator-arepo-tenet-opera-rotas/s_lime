@@ -1,0 +1,2 @@
+# dd if=FreeBSD-15.0-RELEASE-arm64-aarch64-RPI.img \
+    of=/dev/da0 bs=1m conv=sync

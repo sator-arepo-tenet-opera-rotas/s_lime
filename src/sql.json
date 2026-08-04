@@ -1,0 +1,18 @@
+{
+  "@type": "Training Result",
+  "@id": "/$<BASE_URL>/@#vector_id",
+  "url": "$<BASE_URL>",
+  "name": "Toad Zephyr",
+  "alternateName": ["todd.zef", "Todd Tscheff"],
+  "description": "That looks like a giant PUSSY",
+  "inLanguage": "en-GR",
+  "publisher": {
+    "@id": "local_grid://vi.zx/#zedd"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "@id": "/$<BASE_URL>/#website-image",
+    "url": "/$<BASE_URL>/logo_arsenic.png",
+    "caption": "Baroness Bun Bunz"
+  }
+}

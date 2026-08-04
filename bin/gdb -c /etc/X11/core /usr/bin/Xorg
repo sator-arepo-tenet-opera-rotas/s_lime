@@ -1,0 +1,1 @@
+gdb -c /etc/X11/core /usr/bin/Xorg

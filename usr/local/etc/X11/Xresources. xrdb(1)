@@ -1,0 +1,10 @@
+xlogin*login.translations: #override\
+	<Key>F1: set-session-argument(failsafe) finish-field()\n\
+	<Key>Return: set-session-argument() finish-field()\n\d\
+  <Key>: insert-char ()\n\d
+xlogin*borderWidth: 3
+xlogin*greeting: CLIENTHOST
+#ifdef COLOR
+xlogin*greetColor: CadetBlue
+xlogin*failColor: red
+#endif
